@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/save', function(req, res, next) {
-  res.render('index', { title: 'TestMach', message:'Welcome to TestMach' });
+  res.render('rule', { title: 'TestMach', message:'Welcome to TestMach' });
 });
 
 module.exports = router;
