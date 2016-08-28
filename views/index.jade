@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p #{message}
+  form(action='/save',method='post')
+   fieldset(data-role='controlgroup')
+    span
+     label(for='title') Title
+    span
+     input(type='text', name='title')
+   p
+   input(type='submit', value='Send')
