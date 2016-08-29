@@ -1,15 +1,19 @@
 extends layout
 
 block content
-  h1= title
-  p #{message}
+  p Saved #{model.title}
   form(action='/save',method='post')
    fieldset(data-role='controlgroup')
     span
-     label(for='title') Title goes here
+     label(for='title') Title
     span
-     input(type='text', name='title')
+     input(type='text', name='title', value=model.title)
+   fieldset(data-role='controlgroup')
+    span
+     label(for='firstName') First Name
+    span
+     input(type='text', name='firstName')
    p
    input(type='submit', value='Send')
    script.
-    {JSON.stringify(message)}
+    console.log('model', !{JSON.stringify(model)});

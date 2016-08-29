@@ -1,13 +1,26 @@
 extends layout
 
 block content
-  h1= title
-  p #{message}
-  form(action='/save',method='post')
+  h1= title 
+  form(action='/',method='post')
    fieldset(data-role='controlgroup')
     span
      label(for='title') Title
+    span     
+     select(name='title')
+      each title in ['Select', 'Mr', 'Mrs', 'Miss']
+       option(value=title,  selected=model.title==title) #{title}
+   fieldset(data-role='controlgroup')
     span
-     input(type='text', name='title')
+     label(for='firstName') First Name
+    span
+     input(type='text', name='firstName' value=model.firstName)
+   fieldset(data-role='controlgroup')
+    span
+     label(for='lastName') Last Name
+    span
+     input(type='text', name='lastName' value=model.lastName)
    p
    input(type='submit', value='Send')
+   script.
+    console.log('model', !{JSON.stringify(model)});
