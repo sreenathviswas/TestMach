@@ -1,0 +1,1 @@
+mongodump /d testmach /o c:\Workshop\TestMach\dump
