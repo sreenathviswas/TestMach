@@ -1,27 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/testmach';
+var db = require("../db");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'TestMach', model:req.body||{}, ruleName:[] });
+	db.getRules(function (rules) {
+		res.render('index', { title: 'TestMach', model:{}, rules: rules });
+	});
 });
 
 router.post('/', function(req, res, next) {	
-	var cursor = [];
-	MongoClient.connect(url, function(err, db) {
-	  console.log("Connected correctly to server..........");
-	   cursor = db.collection('rule').find();
-		cursor.each(function(err, doc) {
-		  if (doc != null) {
-			 console.dir(doc.ruleName);
-		  } 
-		});
-	  db.close();
-	  res.render('index', { title: 'TestMach', model:req.body, ruleName:cursor });
-	  console.dir(cursor[0]);
+	db.addRule(req.body.firstName, function (rules) {
+		console.dir(rules);
+		res.render('index', { title: 'TestMach', model:req.body, rules: rules });
 	});	
+	db.getRules(function (rules) {
+		console.dir(rules);
+		res.render('index', { title: 'TestMach', model:req.body, rules: rules });
+	});
 });
+
+
+router.post('/delete', function(req, res, next) {
+	db.deleteRule(req.body.id, function () {
+		db.getRules(function (rules) {
+			console.dir(rules);
+			res.render('index', { title: 'TestMach', model:req.body, rules: rules });
+		});	
+		//res.render('index', { title: 'TestMach', model:{}, rules: rules });
+	});
+})
 
 module.exports = router;

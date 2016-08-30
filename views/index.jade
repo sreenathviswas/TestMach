@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  h1= title 
-  if(ruleName)
-   p #{ruleName[0]}
+  ul
+  each rule in rules
+   form(action='/delete', method='post')
+    li= rule.ruleName
+     input(type='hidden', name="id", value=rule._id)
+     input(type='submit', value='Delete')
   form(action='/',method='post')
    fieldset(data-role='controlgroup')
     span
@@ -25,4 +28,4 @@ block content
    p
    input(type='submit', value='Send')
    script.
-    console.log('model', !{JSON.stringify(model)}, 'rule', !{JSON.stringify(model)});
+    console.log('model', !{JSON.stringify(model)}, 'rule', !{JSON.stringify(rules)});
