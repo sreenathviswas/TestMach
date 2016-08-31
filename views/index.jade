@@ -1,6 +1,6 @@
 extends layout
 
-block content
+block content 
   ul
   each rule in rules
    form(action='/delete', method='post')
@@ -8,6 +8,7 @@ block content
      input(type='hidden', name="id", value=rule._id)
      input(type='submit', value='Delete')
   form(action='/',method='post')
+   input(type='hidden', name="rules", value=JSON.stringify(rules))
    fieldset(data-role='controlgroup')
     span
      label(for='title') Title

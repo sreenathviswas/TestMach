@@ -2,12 +2,9 @@
 // Mongo
 
 import * as mongodb from 'mongodb';
-//import mongodb = require('mongodb');
 
-var server = new mongodb.Server('127.0.0.1', 27017);
+var server = new mongodb.Server('localhost', 27017);
 var db = new mongodb.Db('testmach', server, { w: 1 });
-var ObjectId = require('mongodb').ObjectID;
-
 db.open(function() {});
 
 export interface Rule {
@@ -30,7 +27,8 @@ export function addRule(ruleName: string, callback: (rules: Rule[]) => void){
         if(error) { console.error(error); return; }
         rules_collection.insert({
 			"ruleName" : ruleName
-		}),(function(error, ruleobjs) {
+        }), (function (error, ruleobjs) {
+            console.log("Insert Error", error, ruleobjs);
            if(error) { console.error(error); return; }
            callback(ruleobjs);
         });
@@ -41,7 +39,7 @@ export function deleteRule(id: string, callback: () => void){
     db.collection('rule', {}, function (error, rules_collection) {
         if (error) { console.error(error); return; }
         rules_collection.remove({ 
-			_id: ObjectId(id)
+            _id: mongodb.ObjectID.createFromHexString(id)
 			}),(function (err, result) {
 				if (err) { console.log("Delete failed:" ,err); }				
 				callback();

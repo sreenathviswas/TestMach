@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"testmach.rule"}]}
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"testmach.rule"},{"v":1,"unique":true,"key":{"ruleName":1.0},"name":"ruleName_1","ns":"testmach.rule"}]}
