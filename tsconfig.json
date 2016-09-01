@@ -5,6 +5,7 @@
         "noImplicitAny": false,
         "sourceMap": true
     },
+    "files": ["./db.ts"],
     "exclude": [
         "node_modules"
     ]
